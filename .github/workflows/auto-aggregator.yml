@@ -1,0 +1,33 @@
+name: Autonomous Research Aggregator
+
+on:
+  schedule:
+    # Run at 00:00 every Monday
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # Allow manual triggers
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Fetch Papers and Update README
+        run: python scripts/build_digest.py
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automated Research Digest Update"
+          branch: main
+          commit_user_name: "GitHub Actions Bot"
+          commit_author: "Actions Bot <actions@github.com>"
