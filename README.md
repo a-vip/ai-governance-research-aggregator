@@ -1,4 +1,4 @@
-# 🤖 AI Governance & Sovereign Algorithms Research Aggregator
+# 🤖 AI Governance Research Aggregator
 
 <div align="center">
   <p><strong>A continuously updated repository of the latest academic research.</strong></p>
